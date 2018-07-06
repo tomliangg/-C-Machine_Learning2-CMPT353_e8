@@ -90,10 +90,16 @@ def main():
     # TODO: create some models
     bayes_rgb_model = GaussianNB()
     bayes_lab_model = make_pipeline(FunctionTransformer(transformer_rgb2lab), GaussianNB())
-    knn_rgb_model = KNeighborsClassifier()
-    knn_lab_model = make_pipeline(FunctionTransformer(transformer_rgb2lab), KNeighborsClassifier())
-    svc_rgb_model = SVC(kernel='linear')
-    svc_lab_model = make_pipeline(FunctionTransformer(transformer_rgb2lab), SVC(kernel='linear'))
+    knn_rgb_model = KNeighborsClassifier(n_neighbors=6)
+    knn_lab_model = make_pipeline(FunctionTransformer(transformer_rgb2lab), KNeighborsClassifier(n_neighbors=6))
+    svc_rgb_model = SVC(kernel='linear', C=3)
+    svc_lab_model = make_pipeline(FunctionTransformer(transformer_rgb2lab), SVC(kernel='linear', C=3))
+    """ 
+    My C and K parameters are definitely not optimal. I tried with larger C (i.e. 50) but the accuracy
+    is not much better; I didn't try high any values larger than C because it will take hours to train
+    my model. So I just leave it
+    """
+
 
     # train each model and output image of predictions
     models = [bayes_rgb_model, bayes_lab_model, knn_rgb_model, knn_lab_model, svc_rgb_model, svc_lab_model]
