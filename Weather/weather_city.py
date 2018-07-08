@@ -3,9 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import FunctionTransformer
-from sklearn.pipeline import make_pipeline
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 
