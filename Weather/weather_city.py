@@ -31,5 +31,17 @@ def main():
     predictions = svc_weather_model.predict(X_unlabelled)
     pd.Series(predictions).to_csv(sys.argv[3], index=False)
 
+    
+    # check where the model makes wrong predictions
+    df = pd.DataFrame({'truth': y_test, 'prediction': svc_weather_model.predict(X_test)})
+    print(df[df['truth'] != df['prediction']])
+
+    """
+    I think the model is making reasonable mistakes because 
+    for the cities which are close to each other
+    geographically, they would have quite similar weathers
+    (i.e. Vancouver and Victoria; Toronto and Ottawa)
+    """
+
 if __name__ == '__main__':
     main()
